@@ -1,6 +1,6 @@
 var passport = require('passport');
 var localStrategy = require('passport-local').Strategy;
-var db = require('../models');
+var User = require('../models/user');
 require('dotenv').config();
 
 passport.serializeUser(function(user, callback){
@@ -8,7 +8,7 @@ passport.serializeUser(function(user, callback){
 });
 
 passport.deserializeUser(function(id, callback){
-  db.user.findById(id).then(function(user){
+  User.findById(id).then(function(user){
     callback(null, user);
   }).catch(function(err){
     callback(err, null);
@@ -19,7 +19,7 @@ passport.use(new localStrategy({
   usernameField: 'email',
   passwordField: 'password'
 }, function(email, password, callback){
-  db.user.findOne({
+  User.findOne({
     where: { email: email }
   }).then(function(user){
     if(!user || !user.isValidPassword(password)){

@@ -1,0 +1,18 @@
+body{
+  /*font-family:"News 706", sans-serif;*/
+  font-size:14px;
+}
+.navbar{
+  background-color: black;
+  min-height: 30px;
+}
+.navbar a {
+  color: white;
+}
+.navbar a:hover{
+  color: #ff5f5f;
+}
+.ga-logo{
+  max-width: 25px;
+  height: auto;
+}

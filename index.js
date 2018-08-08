@@ -4,11 +4,14 @@ var express = require('express');
 var ejsLayouts = require('express-ejs-layouts');
 var flash = require('connect-flash');
 var isLoggedIn = require('./middleware/isLoggedIn');
+var staffLoggedIn = require('./middleware/staffLoggedIn');
 var passport = require('./config/passportConfig');
+var path = require('path');
 var session = require('express-session');
 var app = express();
 
 app.set('view engine', 'ejs');
+app.use('/public', express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(ejsLayouts);
 app.use(session({
@@ -33,7 +36,7 @@ app.get('/profile', isLoggedIn, function(req, res){
   res.render('profile');
 });
 
-app.get('/overview/:courseid', isLoggedIn, function(req, res){
+app.get('/overview/:courseid', staffLoggedIn, function(req, res){
   res.send('overview of' + req.params.courseid);
 });
 

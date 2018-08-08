@@ -1,6 +1,6 @@
 var express = require('express');
 var passport = require('../config/passportConfig');
-var db = require('../models');
+var User = require('../models/user');
 var router = express.Router();
 
 router.get('/login', function(req, res){
@@ -19,8 +19,7 @@ router.get('/signup', function(req, res){
 });
 
 router.post('/signup', function(req, res, next){
-  console.log('req.body is', req.body);
-  db.user.findOrCreate({
+  User.findOrCreate({
     where: { email: req.body.email },
     defaults: {
       username: req.body.username,
