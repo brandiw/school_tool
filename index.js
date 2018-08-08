@@ -33,6 +33,10 @@ app.get('/profile', isLoggedIn, function(req, res){
   res.render('profile');
 });
 
+app.get('/overview/:courseid', isLoggedIn, function(req, res){
+  res.send('overview of' + req.params.courseid);
+});
+
 app.use('/auth', require('./controllers/auth'));
 
 app.listen(process.env.PORT || 3000);

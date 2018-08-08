@@ -17,17 +17,17 @@ module.exports = {
       preferredname: {
         type: Sequelize.STRING
       },
-      usertypeId: {
-        type: Sequelize.INTEGER
+      email: {
+        type: Sequelize.STRING
       },
       phone: {
         type: Sequelize.STRING
       },
-      email: {
+      password: {
         type: Sequelize.STRING
       },
-      portfolio: {
-        type: Sequelize.STRING
+      usertypeId: {
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,
