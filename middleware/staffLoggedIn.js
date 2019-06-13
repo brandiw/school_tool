@@ -1,9 +1,9 @@
-module.exports = function(req, res, next){
-  if(!req.user || req.user.usertypeId === 1){
-    req.flash('error', 'You must be logged in as an instructor or an administrator to view this page');
-    res.redirect('/auth/login');
+module.exports = (req, res, next) => {
+  if(req.user && req.user.usertypeId && req.user.usertypeId !== 1) {
+    next()
   }
   else{
-    next();
+    req.flash('error', 'You must be logged in as an instructor or an administrator to view this page');
+    res.render('403');
   }
 }

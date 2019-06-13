@@ -1,0 +1,44 @@
+<div>
+  <h2><%= course.cohort %></h2>
+
+  <div class="row">
+    <div class="col-xs-12 col-sm-6">
+      <h3>Course Details</h3><br>
+      <h5>Instructor Info:</h5>
+      <div class="sub-heading">
+      <% if(teacher !== 'TBD') {%>
+        <p>Name: <a href="/profile/<%= teacher.id%>"><%= teacher.firstname %> <%= teacher.lastname %></a></p>
+        <p>GA Campus: <%= teacher.location %></p>
+        <p>Email: <%= teacher.email %></p>
+      <%} else {%>
+        <h5>To Be Determined</h5>
+      <%}%>
+      </div>
+      <h5>Start Date: <%= moment(course.start).format("MMM Do, YYYY"); %></h5>
+      <h5>End Date: <%= moment(course.end).format("MMM Do, YYYY"); %></h5>
+    </div>
+    <div class="col-xs-12 col-sm-6">
+      <h3>Roster</h3><br>
+      <% if (course.users && course.users.length > 0){%>
+        <table class="table table-striped">
+          <header>
+            <tr>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Email</th>
+            </tr>
+          </header>
+          <% course.users.sort(function(a, b){ return a.firstname > b.firstname; }).forEach(function(student){%>
+            <tr>
+              <td><a href="/profile/<%= student.id %>"><%= student.firstname %></a></td>
+              <td><%= student.lastname %></td>
+              <td><%= student.email %></td>
+            </tr>
+          <%});%>
+        </table>
+      <%} else {%>
+        <p>No enrollments at this time</p>
+      <%}%>
+    </div>
+  </div>
+</div>

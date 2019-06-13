@@ -1,18 +1,23 @@
+// Package Requirements
 require('dotenv').config();
-var bodyParser = require('body-parser');
-var express = require('express');
-var ejsLayouts = require('express-ejs-layouts');
-var flash = require('connect-flash');
-var isLoggedIn = require('./middleware/isLoggedIn');
-var staffLoggedIn = require('./middleware/staffLoggedIn');
-var passport = require('./config/passportConfig');
-var path = require('path');
-var session = require('express-session');
-var app = express();
+let express = require('express');
+let ejsLayouts = require('express-ejs-layouts');
+let flash = require('connect-flash');
+let moment = require('moment')
+let path = require('path');
+let session = require('express-session');
 
+// Middleware
+let isLoggedIn = require('./middleware/isLoggedIn');
+let passport = require('./config/passportConfig');
+let staffLoggedIn = require('./middleware/staffLoggedIn');
+
+let app = express();
+
+// Middleware set-up
 app.set('view engine', 'ejs');
 app.use('/public', express.static(path.join(__dirname, 'public')));
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: false }));
 app.use(ejsLayouts);
 app.use(session({
   secret: process.env.SESSION_SECRET,
@@ -22,24 +27,26 @@ app.use(session({
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(function(req, res, next){
+app.use((req, res, next) => {
   res.locals.currentUser = req.user;
   res.locals.alerts = req.flash();
+  res.locals.moment = moment;
   next();
 });
 
-app.get('/', function(req, res){
+// Routers
+app.use('/auth', require('./controllers/auth'));
+app.use('/profile', isLoggedIn, require('./controllers/profile'));
+app.use('/courses', isLoggedIn, require('./controllers/courses'));
+
+// Home route
+app.get('/', (req, res) => {
   res.render('home');
 });
 
-app.get('/profile', isLoggedIn, function(req, res){
-  res.render('profile');
-});
-
-app.get('/overview/:courseid', staffLoggedIn, function(req, res){
-  res.send('overview of' + req.params.courseid);
-});
-
-app.use('/auth', require('./controllers/auth'));
+// Catch-all route
+app.get('*', (req, res) => {
+  res.render('404');
+})
 
 app.listen(process.env.PORT || 3000);

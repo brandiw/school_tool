@@ -1,0 +1,58 @@
+<h2>PROFILE</h2>
+<div>
+  <div class="row">
+    <div class="col-xs-12 col-sm-5 no-float">
+      <div class="sidebar fill">
+        <img src="<%= otherUser.image %>" alt="profile" class="profile-image">
+        <h4>
+          <%= otherUser.firstname %> <%= otherUser.lastname %>
+        </h4>
+        <h5>
+          <%= otherUser.usertypeId == 1 ? 'Student' : 'Staff' %>, Seattle
+        </h5>
+        <br>
+        <h6>
+          <%= otherUser.email %>
+        </h6>
+        <h6>
+          Preferred Name: <%= otherUser.preferredname %>
+        </h6>
+        <h6>
+          Phone: <%= otherUser.phone %>
+        </h6>
+        <br>
+        <h5>Emergency Contact Info</h5>
+        <h6>
+          Relationship: Mother
+        </h6>
+        <h6>
+          Phone: 253-555-7777
+        </h6>
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-7">
+      <div class="main">
+        <div class="row">
+          <div class="col-xs-12 innerbar">
+            <div class="row">
+              <div class="col-xs-12 col-sm-6">
+                <h4>Emergency Info</h4>
+                <p>lalala</p>
+              </div>
+              <div class="col-xs-12 col-sm-6">
+                <h4>Personal Info</h4>
+                <p>lalala</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 innerbar">
+            <h3>Bio</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

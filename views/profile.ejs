@@ -1,5 +1,92 @@
-<h2>PROFILE</h2>
 <div>
-  <h3>
-    Welcome back, <%= currentUser.firstname %>!
-  </h3>
+  <div class="row">
+    <div class="col-xs-12 col-sm-5 no-float">
+      <div class="sidebar fill">
+        <img src="<%= currentUser.image %>" alt="profile" class="profile-image">
+        <h4>
+          <%= currentUser.firstname %> <%= currentUser.lastname %>
+        </h4>
+        <h5>
+          <%= currentUser.usertypeId == 1 ? 'Student' : 'Staff' %>,
+          <%= currentUser.location %>
+        </h5>
+        <br>
+        <h6>
+          <%= currentUser.email %>
+        </h6>
+        <h6>
+          Preferred Name: <%= currentUser.preferredname %>
+        </h6>
+        <h6>
+          Phone: <%= currentUser.phone %>
+        </h6>
+        <br>
+        <h5>Emergency Contact Info</h5>
+        <h6>
+          Relationship: Mother
+        </h6>
+        <h6>
+          Phone: 253-555-7777
+        </h6>
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-7">
+      <div class="main">
+        <div class="row">
+          <div class="col-xs-12 innerbar">
+            <div class="row">
+              <div class="col-xs-12 col-sm-6">
+                <h4>Emergency Info</h4>
+                <p>lalala</p>
+                <a href="/emergency/add" class="btn btn-danger">Edit Info</a>
+              </div>
+              <div class="col-xs-12 col-sm-6">
+                <h4>Personal Info</h4>
+                <p>lalala</p>
+                <a href="/personal/add" class="btn btn-primary">Edit Info</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 innerbar">
+            <div class="row">
+                <% if(currentUser.usertypeId == 1) {%>
+                  <div class="col-xs-12 col-sm-6">
+                    <h4>Class Progress</h4>
+                    <p>lalala</p>
+                    <p>viz here</p>
+                  </div>
+                  <div class="col-xs-12 col-sm-6">
+                    <h4>Outcomes Progress</h4>
+                    <p>lalala</p>
+                    <p>viz here</p>
+                  </div>
+                <%} else {%>
+                  <div class="col-xs-12">
+                    <h4>Courses</h4>
+                    <table class="table table-striped">
+                      <header>
+                        <tr>
+                          <th>Course</th>
+                          <th>Start</th>
+                        </tr>
+                      </header>
+                      <% courses.forEach(function(c){ %>
+                        <tr>
+                          <th><a href="/courses/<%= c.id %>"><%= c.name %></a></th>
+                          <td><%= moment(c.start).format('MMMM Do[,] YYYY') %></td>
+                        </tr>
+                      <%});%>
+                    </table>
+                    <a href="/courses/new" class="btn btn-success">Add Course</a>
+                  </div>
+                <%}%>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

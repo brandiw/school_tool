@@ -1,6 +1,6 @@
 var express = require('express');
 var passport = require('../config/passportConfig');
-var User = require('../models/user');
+var db = require('../models');
 var router = express.Router();
 
 router.get('/login', function(req, res){
@@ -19,13 +19,18 @@ router.get('/signup', function(req, res){
 });
 
 router.post('/signup', function(req, res, next){
-  User.findOrCreate({
+  console.log('RB:', req.body)
+  db.user.findOrCreate({
     where: { email: req.body.email },
     defaults: {
-      username: req.body.username,
+      preferredname: req.body.preferredname || req.body.firstname,
       firstname: req.body.firstname,
       lastname: req.body.lastname,
-      password: req.body.password
+      password: req.body.password,
+      phone: req.body.phone,
+      userTypeId: 1,
+      image: req.body.image,
+      location: req.body.location
     }
   }).spread(function(user, wasCreated){
     if(wasCreated){

@@ -16,3 +16,29 @@ body{
   max-width: 25px;
   height: auto;
 }
+
+/* PROFILE */
+.sidebar,
+.innerbar {
+  background-color: #eee;
+  padding: 10px;
+  text-align: center;
+  border-radius: 5px;
+  margin: 5px;
+}
+
+.profile-image {
+  max-width: 100px;
+  height: auto;
+  border: 5px solid black;
+  border-radius: 5px;
+}
+
+.fill {
+  height: 100%;
+}
+
+.sub-heading{
+  margin-left: 15px;
+  margin-bottom: 10px;
+}
